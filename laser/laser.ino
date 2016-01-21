@@ -4,7 +4,7 @@ int sum=0;
 int input;
 int a[181];
 SoftwareSerial PC(2,3); // RX, TX
-SoftwareSerial LASER(4, 5); // RX, TX
+SoftwareSerial LASER(4, 5); // RX, TX  Uni-T UT390B
 Servo myservo;
 int pos = 0;
 int strstart_P(const char *s1, const char * PROGMEM s2)
