@@ -1,7 +1,7 @@
 import processing.serial.*;
 int counter=0;
 Serial sp;
-int val;
+float[] indata;
 static float PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170680;
 float rtdx(float t, float r){
   float rad;
@@ -42,6 +42,7 @@ void setup() {
   //sp = new Serial(this, 9600);
 }
 void draw() {
+  indata = new float[181];
   /*
   if(0<sp.available()){
     val = sp.read();
@@ -58,7 +59,15 @@ void draw() {
   //End
   
   //Draw Test
-  dti(30,2,60,2,100);
+  for(int i=0;i<=180;i++){
+    if(i<180){
+      dti(i,2,i+1,2,100);
+      //dti(i,indata[i],i+1,indata[i],100);
+    }else{
+      dti(i,2,0,2,100);
+      //dti(i,indata[i],0,indat[i],100);
+    }
+  }
   //End
   
   //Debug Area
