@@ -30,6 +30,11 @@ float sfty(float xp, float yp){
 float sfty(float OX, float OY, float xp, float yp){
   return OY - yp;
 }
+void dti(float t1,float r1,float t2,float r2,float times){
+  float[] pos1={rtdx(t1,r1*times),rtdy(t1,r1*times)};
+  float[] pos2={rtdx(t2,r2*times),rtdy(t2,r2*times)};
+  line(sftx(pos1[0],pos1[1]),sfty(pos1[0],pos1[1]),sftx(pos2[0],pos2[1]),sfty(pos2[0],pos2[1]));
+}
 void setup() {
   size(500, 500);
   frameRate(10);
@@ -53,7 +58,13 @@ void draw() {
   //End
   
   //Draw Test
-  line(sftx(0,0),sfty(0,0),sftx(0,100),sfty(0,100));
+  dti(30,2,60,2,100);
+  //End
+  
+  //Debug Area
+  if(counter==1){
+    print();
+  }
   //End
   
   /*
@@ -64,14 +75,6 @@ void draw() {
   //ellipse(mouseX, mouseY, 80, 80);
   if(mousePressed){
     saveFrame("output-####.png");
-  }
-  */
-  /*
-  if(counter==1){
-    print(ftx(250,250,0,0));
-    print(fty(250,250,0,0));
-    print(ftx(250,250,1,0));
-    print(fty(250,250,1,0));
   }
   */
 }
