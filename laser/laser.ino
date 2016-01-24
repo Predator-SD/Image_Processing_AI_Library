@@ -1,8 +1,8 @@
 #include <Servo.h>
 #include <SoftwareSerial.h>
 int sum=0;
-int input;
-int a[181];
+float input;
+float a[181];
 SoftwareSerial PC(2,3); // RX, TX
 SoftwareSerial LASER(4, 5); // RX, TX  Uni-T UT390B
 Servo myservo;
@@ -38,6 +38,7 @@ void setup(void)
 }
 void loop(void)
 {
+  if(PC.read()==0){
     if(sum=180){
       sum=0;
     }
@@ -56,12 +57,18 @@ void loop(void)
       Serial.println(buf);
       */
       if(sum<181){
-        input=dist_mm;
+        input=float(dist_mm);
         a[sum]=input;
         sum++;
       }else{
         PC.println("ERROR!!!");
       }
     }
-    for (int i=0; i<181; i++) { PC.write(float(a[i])); }  
+    int com=1;
+    PC.write(com);
+    delay(30);
+    for (int i=0; i<181; i++) { PC.write(a[i]); }
+    myservo.write(0);
+    pos=0;
+  }  
 }

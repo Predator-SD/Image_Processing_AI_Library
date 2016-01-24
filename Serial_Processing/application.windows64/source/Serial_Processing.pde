@@ -1,6 +1,7 @@
 import processing.serial.*;
 int command=0;
 boolean draw=false;
+int counter=0;
 Serial sp;
 float[] indata;
 static float PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170680;
@@ -43,11 +44,22 @@ void setup() {
   sp = new Serial(this,"COM3", 9600);
   //Change the COM here!!!
 }
-void draw() { 
+void draw() {
+  
   command=sp.read();
   if(command==1){
     draw=true;
-  }  
+  }
+  
+  indata = new float[181];
+  if(0<sp.available()){
+    for(int i =0;i<=180;i++){
+      indata[i] = sp.read();
+    }
+  }
+  
+  counter=counter+1;
+  
   //Save Button
   stroke(0,0,0);
   text("Save",16,25);
@@ -75,12 +87,6 @@ void draw() {
   line(10+50+50,10,10+50+50,30);
   //End
   if(draw==true){
-    indata = new float[181];
-    if(0<sp.available()){
-      for(int i =0;i<=180;i++){
-        indata[i] = sp.read();
-      }
-    }
     //Draw Test
     for(int i=0;i<=180;i++){
       if(i<180){
@@ -95,7 +101,24 @@ void draw() {
     }
     draw=false;
     //End
-  }  
+  }
+  
+  //Debug Area
+  if(counter==1){
+    print();
+  }
+  //End
+  
+  /*
+  line(mouseX, mouseY, 700, 500);
+  line(mouseX, mouseY, 0, 0);
+  line(mouseX, mouseY, 700, 0);
+  line(mouseX, mouseY, 0, 500);
+  //ellipse(mouseX, mouseY, 80, 80);
+  if(mousePressed){
+    saveFrame("output-####.png");
+  }
+  */
 }
 void mouseClicked() {
   if(mouseButton == LEFT&&mouseX>10&&mouseX<50&&mouseY>0&&mouseY<50){
