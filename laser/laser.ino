@@ -63,5 +63,5 @@ void loop(void)
         PC.println("ERROR!!!");
       }
     }
-    for (int i=0; i<181; i++) { PC.write(a[i]); }  
+    for (int i=0; i<181; i++) { PC.write(float(a[i])); }  
 }
