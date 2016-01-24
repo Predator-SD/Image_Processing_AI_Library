@@ -39,15 +39,18 @@ void setup() {
   size(500, 500);
   frameRate(10);
   stroke(0,0,255);
-  //sp = new Serial(this, 9600);
+  sp = new Serial(this,"COM3", 9600);
+  //Change the COM here!!!
 }
 void draw() {
   indata = new float[181];
-  /*
+  
   if(0<sp.available()){
-    val = sp.read();
+    for(int i =0;i<=180;i++){
+      indata[i] = sp.read();
+    }
   }
-  */
+  
   counter=counter+1;
   
   //Save Button
@@ -61,11 +64,11 @@ void draw() {
   //Draw Test
   for(int i=0;i<=180;i++){
     if(i<180){
-      dti(i,2,i+1,2,100);
-      //dti(i,indata[i],i+1,indata[i],100);
+      //dti(i,2,i+1,2,100);
+      dti(i,indata[i],i+1,indata[i],100);
     }else{
-      dti(i,2,0,2,100);
-      //dti(i,indata[i],0,indat[i],100);
+      //dti(i,2,0,2,100);
+      dti(i,indata[i],0,indata[i],100);
     }
   }
   //End
