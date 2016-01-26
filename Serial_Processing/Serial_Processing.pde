@@ -1,4 +1,6 @@
 import processing.serial.*;
+String[] raw_data;
+String COM;
 int command=0;
 boolean draw=false;
 Serial sp;
@@ -37,10 +39,12 @@ void dti(float t1,float r1,float t2,float r2,float times){
   line(sftx(pos1[0],pos1[1]),sfty(pos1[0],pos1[1]),sftx(pos2[0],pos2[1]),sfty(pos2[0],pos2[1]));
 }
 void setup() {
+  raw_data=loadStrings("COMNAME.SD");
+  COM=raw_data[0];
   size(500, 500);
   frameRate(10);
   background(200, 200, 200);
-  sp = new Serial(this,"COM3", 9600);
+  sp = new Serial(this,COM, 9600);
   //Change the COM here!!!
 }
 void draw() { 
